@@ -29,6 +29,16 @@ app.use(express.json());
  *  combined with the id sent as a route parameter in the url
  */
 // Your code here
+app.get('/viewers/:id', (req, res) => {
+    const user = {
+        id: req.params.id,
+        firstName: 'T',
+        lastName: 'Lim',
+        birthDate: 'whatever',
+        favoriteMovies: ['Shrek 3']
+    }
+    res.json(user)
+})
 
 /** Basic Phase 3 - Query params in URL
  *      Method: GET
@@ -48,6 +58,14 @@ app.use(express.json());
  *          message required
  */
 // Your code here
+app.get('/info', (req, res) => {
+    if (!req.query.message) {
+        return res.send('message required')
+    }
+        
+    res.send('HELLO EXPRESS???')
+
+})
 
 /**
  *  IMPORTANT: Scroll to the top for basic phases.
