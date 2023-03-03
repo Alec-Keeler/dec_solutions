@@ -1,0 +1,13 @@
+Table kids {
+  id int [pk]
+  name varchar
+  age int
+}
+
+Table toys {
+  id int [pk]
+  name varchar
+  kid_id int
+}
+
+Ref: toys.kid_id < kids.id
