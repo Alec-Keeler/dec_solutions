@@ -43,3 +43,18 @@ VALUES
   (5, 'Crinkle Ball'),
   (7, 'Cheetos'),
   (8, 'Yarn');
+
+
+  UPDATE toys
+  SET name = 'Catnip Bunny'
+  WHERE toys.cat_id IN (
+    SELECT id
+    FROM cats
+    WHERE name = 'Molly'
+  );
+
+  SELECT cats.name, COUNT(*) AS toy_count
+  FROM toys
+  JOIN cats ON (cats.id = toys.cat_id)
+  GROUP BY cat_id
+  HAVING toy_count >= 2;

@@ -60,3 +60,25 @@ VALUES
   (5, 'Crinkle Ball'),
   (7, 'Cheetos'),
   (8, 'Yarn');
+
+
+SELECT toys.name
+FROM toys 
+JOIN cats ON (cats.id = toys.cat_id)
+WHERE cats.name = 'Garfield';
+
+SELECT name 
+FROM toys
+WHERE cat_id = (
+  SELECT id
+  FROM cats
+  WHERE name = 'Garfield'
+);
+
+INSERT INTO toys (name, cat_id)
+VALUES
+('Pepperoni', (
+  SELECT id
+  FROM cats
+  WHERE name = 'Garfield'
+));
