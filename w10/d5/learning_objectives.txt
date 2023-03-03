@@ -1,0 +1,4 @@
+Aggregate a query using GROUP BY and HAVING
+Aggregate a query using MAX, MIN, COUNT
+Convert a JOIN query into a subquery
+Use a subquery inside of an INSERT for dynamic seeding
