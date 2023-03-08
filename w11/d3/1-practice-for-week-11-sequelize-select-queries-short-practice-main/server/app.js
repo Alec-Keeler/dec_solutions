@@ -46,6 +46,11 @@ app.get('/puppies/name/:name', async (req, res, next) => {
     let puppyByName;
     
     // Your code here
+    puppyByName = await Puppy.findOne({
+        where: {
+            name: req.params.name
+        }
+    })
 
     res.json(puppyByName);
 })
@@ -55,7 +60,14 @@ app.get('/puppies/name/:name', async (req, res, next) => {
 // All puppies with breed ending in 'Shepherd'
 // WHERE clause with a comparison
 app.get('/puppies/shepherds', async (req, res, next) => {
-    let shepherds;
+    let shepherds = await Puppy.findAll({
+        where: {
+            breed: {
+                [Op.endsWith]: 'Shepherd'
+            }
+        },
+        order: [['name', 'DESC']]
+    })
     
     // Your code here
 
@@ -70,6 +82,18 @@ app.get('/puppies/tinybabies', async (req, res, next) => {
     let tinyBabyPuppies;
     
     // Your code here
+    tinyBabyPuppies = await Puppy.findAll({
+        attributes: ['name', 'age_yrs', 'weight_lbs'],
+        where: {
+            age_yrs: {
+                [Op.lte]: 1
+            },
+            weight_lbs: {
+                [Op.lte]: 20
+            }
+        },
+        order: [['age_yrs'], ['weight_lbs']]
+    })
 
     res.json(tinyBabyPuppies);
 })

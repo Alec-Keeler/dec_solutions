@@ -57,6 +57,8 @@ app.get('/bands-lazy', async (req, res, next) => {
 app.get('/bands-eager', async (req, res, next) => {
     const payload = await Band.findAll({
         // Your code here
+        include: Musician,
+        order: [['name'], [Musician, 'firstName']]
     });
     res.json(payload);
 });
