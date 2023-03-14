@@ -64,27 +64,39 @@ app.get('/cats/:catId', async (req, res, next) => {
     /* 
         STEP 2A: Find a cat with their associated toys
     */
-    const cat = {};
+    const cat = await Cat.findByPk(req.params.catId, {
+        include: {
+            model: Toy
+        }
+    });
 
     const toys = cat.Toys;
+    console.log(toys)
 
     /* 
         STEP 2B: Calculate the total amount of toys that the cat is
         associated with.
     */
-    // const toyCount;
+    const toyCount = toys.length
+
 
     /*
         STEP 2C: Calculate the total price of all the toys that the cat is
         associated with
     */
-    // const toyTotalPrice;
+    let toyTotalPrice = 0
+    for (let i = 0; i < toys.length; i++) {
+        const toy = toys[i];
+        toyTotalPrice += toy.price
+    }
+    console.log(toyTotalPrice)
+
 
     /*
         STEP 2D: Calculate the average price of all the toys that the cat is
         associated with
     */
-    // const toyAvgPrice;
+    const toyAvgPrice = toyTotalPrice/toyCount
 
     res.json({
         toyCount,
