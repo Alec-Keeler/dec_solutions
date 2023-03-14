@@ -5,7 +5,7 @@ module.exports = {
     seederStorage: "sequelize",
     logQueryParameters: true,
     typeValidation: true,
-
+    benchmark: true
     // STEP #0a: Configure Benchmarking
 
     // Your code here

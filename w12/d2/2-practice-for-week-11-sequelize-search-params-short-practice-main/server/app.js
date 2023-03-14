@@ -69,6 +69,13 @@ app.get('/musicians', async (req, res, next) => {
             through: { attributes: [] } // Omits the join table attributes
         }] } 
     */
+    if (req.query.instrumentTypes) {
+        query.include.push({
+            model: Instrument,
+            where: { type: req.query.instrumentTypes },
+            through: { attributes: [] }
+        })
+    }
 
     // Your code here
 
