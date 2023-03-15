@@ -21,6 +21,21 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Instrument',
+    defaultScope: {
+      where: {
+        type: 'percussion'
+      }
+    },
+    scopes: {
+      getByStoreId(storeId) {
+        const {Store} = require('../models')
+        return {
+          // include: {model: Store, where: {id: storeId}},
+          include: Store,
+          where: {storeId}
+        }
+      }
+    }
   });
   return Instrument;
 };

@@ -17,7 +17,7 @@ app.use(express.json());
 // STEP 1: Apply a default scope onto the searches
 // List of all the instruments in the database - DO NOT MODIFY
 app.get('/instruments', async (req, res, next) => {
-    const allInstruments = await Instrument.findAll();
+    const allInstruments = await Instrument.unscoped().findAll();
     return res.json(allInstruments);
 });
 
@@ -41,7 +41,9 @@ app.get('/instruments/woodwind', async (req, res, next) => {
 // STEP 3 CHALLENGE: Implement the named function scopes to their dynamic routes
 // and returning the list in order by their names alphabetically
 app.get('/stores/:storeId/instruments', async (req, res, next) => {
-    const filterStoreInstruments = await Instrument.findAll()
+    const filterStoreInstruments = await Instrument.scope([{
+        method: ['getByStoreId', req.params.storeId]
+    }]).findAll()
     // Your code here
     res.json(filterStoreInstruments);
 });
