@@ -1,0 +1,20 @@
+Encode - easily reversible (useful), not secure
+Encrypt - reversible (with a password), pretty secure
+Hash - NOT reversible, very secure (WITH salts)
+
+Hash gives same output for any given string EVERY time
+password+randomcharacters > hash algo > 12345
+somerandomstring > hash algo > 12345
+password > hash algo > 12345 ?
+
+Hash collisions
+    rainbow table attack
+
+SALT
+
+JWT
+header - type of token, algorithm (hashing signature) - encoded
+payload - data, claims (expiration, created time) - encoded
+signature - hash(header + payload + secret key(salt))
+
+header.payload.signature

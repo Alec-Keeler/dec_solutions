@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 // Import package
-
+const jwt = require('jsonwebtoken');
 // Your code here
 
 // Define variables - DO NOT MODIFY
@@ -12,21 +12,25 @@ let payload;
 // 1. Sign (create) a JWT containing your email address
 
 // Your code here
-
+token = jwt.sign(
+    { email: "johnny@gmail.com" },
+    process.env.SECRET_KEY,
+    {expiresIn: 604800}
+)
 // See the JWT in the console
 console.log('JWT:', token);
 
 // 2. Decode a JWT Payload
 
 // Your code here
-
+payload = jwt.decode(token)
 // See the decoded payload in the console
 console.log('Payload:', payload);
 
 // 3. Verify a JWT
 
 // Your code here
-
+payload = jwt.verify(token, process.env.SECRET_KEY)
 // See the verified payload in the console
 console.log('Verified Payload:', payload);
 
